@@ -1,0 +1,27 @@
+\section{Risk-Neutral Valuation of Capped Volatiliy Swaps}
+
+A volatility swap is a forward contract that benefits the long position (i.e. buyer) when the realized volatility is above strike level and demands payment otherwise. The short position (i.e. seller or counterparty) will always be at the opposite end of the transaction. The pay-off for the long-position is given by:
+
+ \begin{equation}
+    Pay\text{-}off = DF\ \times\ motional\ \times\ [min(realized vol, cap)- strike]
+    \label{eq:pay-off}
+\end{equation}
+
+Under a risk-neutral setting the price at time t of a VOSW should equal the discounted expected pay-off and can be calculated by:
+
+$$P_{t} = notional \times DF_{t} \times (\mathbb{E}^\mathbb{Q}[\sigma_{r}]-K)$$
+
+Where $DF_{t}$ is the discount factor at time t, $\sigma_{r}$the realized volatility of the underlying asset from time t until maturity T, which is calculated by: 
+
+ \begin{equation}
+    \sigma_{R_{yearly}}=  \sqrt{\left(\frac{252}{n}\right) \sum_{i=1}^{n} ln \sigma \left(\frac{\delta_i}{\delta_{i-1}}\right)^2}  
+    \label{eq:realize-voltaility}
+\end{equation}
+
+
+where $\left(\frac{\delta_i}{\delta_{i-1}}\right)^2$ are the daily square leg-return estimating ${\sigma_{R}}_{daily}$. The mean ${\sigma_{R}}_{daily}$ times the number of trading days per year gives ${\sigma_{R}}_{yearly}$.
+
+The Fair Swap Price is denoted by $K$ and $\mathbb{E}^\mathbb{Q}$ is the expected value operator under an equivalent martingale measure $\mathbb{Q}$.\\
+Assuming risk-neutral pricing, at contract initiation a fair strike value for a VOSW (expressed in volatility terms) can be determined by finding $\mathbb{E}^\mathbb{Q}[\sqrt{\sigma_{r}^{2}}]$, which is the expected value of the square root of the variance process. 
+When setting $K$ equal to this value the price $P_{t}$ of the VOSW becomes 0. Theoretically, in this situation market participants are indifferent about taking long or short positions in these contracts, because on average the pay-offs are equal. However, in practice new contracts will only be offered at fair strike, so pricing in essence boils down to finding fair strike values.\\
+

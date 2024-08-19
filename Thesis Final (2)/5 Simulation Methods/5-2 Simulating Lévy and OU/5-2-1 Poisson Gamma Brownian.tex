@@ -1,0 +1,73 @@
+
+\subsection{Poisson processes, Gamma processes and Brownian Motion}
+
+The simulation methods discussed here give a basic framework of how stochastic processes are simulated in general. The methods discussed here for these basic processes, will serve as building blocks for all the simulation methods that follow. More advanced processes will extend on or combine these simulation methods.\\
+
+The Gamma and Poisson processes will be used in the Gamma-OU process, that is a crucial component in of both the BNS and the Lévy SV Market model. A popular process using normally distributed increments is Brownian Motion which serves a similar role in the Heston model. In this chapter we will point out that simulating the calibrated SDEs of the SV Models we discuss in this work, boils down to generating random standard uniform and standard normal numbers. And using these number in a structured manner, by adding more complexity step by step.\\
+
+A Poisson process $N=\{N_{t},t\geq 0\}$ with intensity parameter $\lambda$ can be simulated in discrete time points $n \Delta \hspace{0.05em} t $ for $n = 0, 1, 2,...,N$ where $N \hspace{0.1em} \Delta \hspace{0.05em} t = T$. The simulated Poisson process generates values $N_{t}$ through time, and the simulation of this process is often used in SV models with stochastic Jumps.
+
+The simulation method  based on how we define a Poisson Process, such as the two definitions in Chapter 3. When defining a Poisson by stationary i.i. Below we discuss the Uniform Method and the Exponential Spacing Method. The latter, starts from an i.i.d. exponential sequence, while the Uniform methods, generates an i.i.d. uniform sequence and relies on the fact that the distribution of an arrival time conditioned on the Poisson Process taking a value of 1 at time t, is $\sim U(0,t)$.\\
+
+\textbf{Uniform Method} \\
+Denote $N=\{N_{t},t\geq 0\}$ a Poisson Process, and $\tilde{N}$ a random draw for a Poisson ($\lambda T$) distribution.
+$N_{T} = \tilde{N}$, as a result $t_1, t_2, ...,t_{\tilde{N}}$ are the arrival times of $N_t$ up until time T.
+
+Now generate an i.i.d. $U(0,T)$ sequence $U_1, U_2, ...,U_{\tilde{N}}$ and denote this sequence rearranged by increasing values as $\tilde{U}_1 < \tilde{U}_2 < ... < \tilde{U}_{\tilde{N}}$ .
+
+Subsequently we can prove that the joint distribution $f_t (t_1, t_2, ...,t_{\tilde{N}})$  equals $f_{\tilde{U}}(\tilde{U}_1, \tilde{U}_2, ...,\tilde{U}_{\tilde{N}})$. Such that the values $\tilde{U}_1, \tilde{U}_2, ...,\tilde{U}_{\tilde{N}}$ equal $t_1, t_2, ...,t_{\tilde{N}} $ arrival times of $N_t \hspace{0.5mm}.$ \\
+
+
+\textbf{Exponential Spacing Method}\\
+Simulate a Poisson process $N=\{N_{t},t\geq 0\}$ with intensity parameter $a\lambda$ in time points $t = \hspace{0.15em} \Delta \hspace{0.05em} t \hspace{0.05em} n$ for $n = 0,1,2,...,N$ using the steps of the Exponential Spacing Method given below:
+
+\begin{flushleft}
+\begin{itemize}
+            \item  Simulate a $n $ random draws from the $U(0,T)$ distribution, denoted $U_1, U_2, ...,U_n$ a
+            \item Simulate for each $U_i$  a random variable $x_i$ following $exp(\lambda)$ distribution, where $x_i$ represents the inter-arrival time of $N_t$ between $N_{i-1}$ and $N_i$
+            \item Calculate the sum variable $s_i = \sum_{j=1}^{i} x_i$ for $i=1,...,n$ 
+            \item The maximum value of the sequence $s_1,...,s_i$ give gives arrival time $t_i$ for $i = 1,...,n$ 
+\end{itemize}
+\end{flushleft}
+
+
+\textbf{Gamma-process}\\
+We can apply different methods when trying to simulate a Gamma(a,b) process, because there are multiple Gamma Random Number Generators available.\\
+
+To simulate a Gamma process, we can use Gamma random number generator.
+
+\textbf{Gamma Random Number Generators} \\
+First we note that, when $X$ is $Gamma(a,b)$, then, for $c>0$, $X/c$ is $Gamma(a,bc)$. So we need only a good generator for $Gamma(a,1)$ random numbers.\\
+Next, we give two possible generators for $Gamma(a,1)$ random numbers which should only be used for $a\leq1$ (which is the case in all of our examples). The first one is called Johnk’s Gamma generator (see Johnk 1964); the second one is Berman’s
+Gamma generator (see Berman 1971).\\
+
+\textbf{Johnk's Gamma Generator} 
+\begin{enumerate}
+    \item Generate two independent uniform random numbers $u_1$ and $u_2$.
+    \item Set $x=u_{1}^{1/a}$ and $y=u_{2}^{1/(1-a)}$.
+    \item If $x+y\leq1$, goto step 4, else goto step 1.
+    \item Generate an $Exp(1)$ random variable, i.e. $z=-log(u)$, where $u$ is a uniform random number.
+    \item Return the number $zx/(x+y)$ as the $Gamma(a,1)$ random number.
+\end{enumerate}
+
+\textbf{Berman's Gamma Generator} 
+\begin{enumerate}
+    \item Generate two independent uniform random numbers $u_1$ and $u_2$.
+    \item Set $x=u_{1}^{1/a}$ and $y=u_{2}^{1/(1-a)}$.
+    \item If $x+y\leq1$, goto step 4, else goto step 1.
+    \item Generate two independent uniform random numbers $u_1$ and $u_2$.
+    \item Return the number $-x log(u_1u_2)$ as the $Gamma(a,1)$ random number.
+\end{enumerate}
+
+Several other generators are described in the literature. We refer to Devroye (1986) for a detailed survey.\\
+
+\textbf{Simulation of a Gamma Process} \\
+Next, it is easy to simulate a sample path of a Gamma process $G = {G_t , t\geq0}$, where $G_t$ follows a $Gamma(at, b)$ law. We simulate the value of this process at time points ${n\Delta t, n=0, 1, \ldots}$ as follows. First generate independent $Gamma(at, b)$ random numbers ${g_n, n\geq1}$ by, for example, the techniques described above. Note that since we assume $\Delta t$ to be very small, $a\Delta t$ is in most cases smaller than $1$ and we can use the Berman or Johnk generators. Then
+
+\begin{equation}
+G_0 = 0,\hspace{0.5cm} G_{n\Delta t} = G_{(n-1)\Delta t} + g_n, \hspace{0.5cm} n\geq1
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+
+
+The simulation of a Gamma(1,b) process simplifies to generating Exp(b) random numbers.\\

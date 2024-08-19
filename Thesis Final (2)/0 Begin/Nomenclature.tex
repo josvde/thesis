@@ -1,0 +1,33 @@
+\DTLnewdb{mydata} % Create a new database
+
+% Manual input nomenclature table
+% entries go into the 3rd {}!
+\DTLnewrow{mydata}
+\DTLnewdbentry{mydata}{Abbreviation}{CVS}
+\DTLnewdbentry{mydata}{Full Name}{Capped Volatility Swap}
+
+\DTLnewrow{mydata}
+\DTLnewdbentry{mydata}{Abbreviation}{SDE}
+\DTLnewdbentry{mydata}{Full Name}{Stochastic Differential Equation}
+
+\DTLnewrow{mydata}
+\DTLnewdbentry{mydata}{Abbreviation}{MC}
+\DTLnewdbentry{mydata}{Full Name}{Monte Carlo Method}
+
+%\DTLnewrow{mydata}
+%\DTLnewdbentry{mydata}{Abbreviation}{SV}
+%\DTLnewdbentry{mydata}{Full Name}{Stochastic Volatility}
+
+\DTLnewrow{mydata}
+\DTLnewdbentry{mydata}{Abbreviation}{SVM}
+\DTLnewdbentry{mydata}{Full Name}{Stochastic Volatility Model}
+
+% Sort data by Abbreviation
+\DTLsort{Abbreviation}{mydata}
+
+\begin{table}[htbp]
+  \begin{tabular}{@{}l@{\hspace{2.5em}}l@{}} %adjust space between columns if needd
+    % Iterate over each row of the sorted data and populate the table
+    \DTLforeach*{mydata}{\Abbreviation=Abbreviation, \FullName=Full Name}{\Abbreviation & \FullName \\}
+  \end{tabular}
+\end{table}

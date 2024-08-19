@@ -1,0 +1,20 @@
+
+\subsection{Variance Gamma processes}
+
+When $X^{VG}$ follows a  $VG(C,G,M)$ law, a ${VG}$ process $X_{t}^{VG}= {X_{t}^{VG}, t>0}$ is determined by the difference of two Gamma processes. Resulting in:
+
+ \begin{equation}
+    X_{t}^{(VG)} = G_{t}^{1} - G_{t}^{2}   
+    \label{eq:var-gamma}
+\end{equation}
+
+where a $G_{t}^{1}$ follows a $Gamma(C,M)$ law and $G_{t}^{2}$ follows a $Gamma(C,G)$ law.\\
+
+\textbf{The VG Process}\\
+\textbf{Simulation of a VG Process as the Difference of Two Gamma Processes}
+Since a VG process can be seen as the difference of two independent Gamma processes, simulation of a VG process is easy. More precisely, a VG process
+\begin{equation}
+X^{(VG)} = {X_{t}^{(VG)}, \hspace{0.5cm}t\geq0}
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+with parameters $C, G, M > 0$ can be decomposed as $X_{t}^{(VG)} = G_{t}^{(1)} - G_{t}^{(2)}$, where $G^{(1)} = {G_{t}^{(1)}, t\geq0}$ is a Gamma process with parameters $a=C$ and $b=M$ and $G^{(2)} = {G_{t}^{(2)}, t\geq0}$ is a Gamma process with parameters $a=C$ and $b=G$.

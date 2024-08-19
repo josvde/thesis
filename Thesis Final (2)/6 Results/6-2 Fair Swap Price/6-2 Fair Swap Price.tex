@@ -1,0 +1,53 @@
+
+\section{Fair Swap Prices at Contract Initiation}
+
+
+From equation 2.1(1), we can find $K$ through:
+
+
+     
+\begin{equation}
+    \mathbb{E}^\mathbb{Q} [K^2] = K^2 = \mathbb{E}^\mathbb{Q} [min(\sigma_{R_{Y}}^2,2,5K)-K^2]
+    \label{eq:fair-swap-K}
+\end{equation}\\
+
+Note that we use the sum the daily variances $\sigma_{R_{D}}$ to find the fair swap rate on yearly realized variances, by minimizing the expression below
+
+--------------------\\
+\textit{add definition g(K) here}\\
+----------------------\\
+
+The method to find the fair strike value based on the simulated daily realized variances, is an iterative approach where a Newton-Raphson optimization scheme is implemented. \\
+
+\textbf{Newton Raphson}\\
+
+Denote $\tilde{K}$ as the Fair Swap Rate for a Capped Volatility Swap then $K=\tilde{K}^2$ becomes the Fair Swap Rate for a Variance Swap.
+
+From a vector of realized variances of size $n$, $K$ is calculated iteratively by minimizing the formula that gives the risk-neutral price, $K$ satisfies the following expression:
+
+\begin{equation}
+g(K) < \epsilon
+%\label{eq:foobar} %add label if required here
+\end{equation}
+where $g(K) = \mathbb{E}(min(\sigma_{R}^2; 2.5K)) - K$, and $\epsilon$ a small number which serves as a stopping ceriterion in the iterative method.
+
+For $i=1,...,g-1$ \hspace{0.2cm} $g(K_i)>\epsilon$ and $g(K_2)<\epsilon$ then $K_\theta=K$ where we calculate these values by:
+
+\begin{equation}
+K_{i+1} = K_i - \frac{g(K_i)}{g'(K_i)} 
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+
+where\\
+-----------\\
+\textit{update g(K) here}\\
+-----------------\\
+
+and $g'(K_i)$ is given by:
+ 
+\begin{equation}
+g'(K_i) = \frac{[g(K_i) - g(K_{i-1})]}{K_i - K_{i-1}}
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+
+For large values of $n$, above $10^6$, $g$ remained relatively small and did not exceed $15$ in most cases.

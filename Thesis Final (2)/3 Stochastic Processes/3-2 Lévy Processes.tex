@@ -1,0 +1,64 @@
+
+\section{Lévy Processes}
+
+- short definition, talk about jumps...\\
+- mention that VG and NIG processes are solid alternatives to BM (see beginning C5), because they allow skewness and excess curtosis.\\
+
+Defining Lévy processes, focussing on finite vs. infite Jump processes. 
+
+\subsection{Poisson and Gamma processes}
+
+- 2 defs Poisson \\
+- Short def Gamma\\
+
+For Poisson: give two definitions a PP, i.i.d. stationary poisson incremenst (see book Jan De Spiegeleer). Then focus on the definition with exponential inter-arrival times. Link this with the fact that we need this to model Jumps.\\
+
+For Gamma: explain why Gamma(a,b) equals Gamma(a,1) / b. And how the Gamma distribution is derived from the exponential distribution.\\
+
+Explain how the Lévy triplet of a Gamma process indicates that it has an infinite number of jumps continuously through time. This is an important characteristic when using a Gamma process to model jumps.\\
+
+\textbf{Definition 1:} A Poisson Process as a Counting Process with stationary independent increments
+
+A counting process $N=\{N_t, t\geq0\}$ is a Poisson process with intensity parameter $\lambda$, $i\sigma$:
+\begin{enumerate}
+    \item The increments are stationary for $\mathscr{L}$, $s$ and $\Delta t\geq0:$\\
+    $P(N_{t+\Delta t} - N_t = \sigma) = P (N_{s+\Delta t} -N_s = \mathscr{L}$)
+    \item Additionally the increments are independent: $\forall 0\leq t_e \leq \ldots \leq t_\mathscr{L}$:\\
+    $N(t_1)-N(t_0)$, $N(t_2)-N(t_1)$, $\ldots$ , $N(\mathscr{L}) - N(\mathscr{L}-1)$\\
+    and follow a Poisson distribution with rate $\lambda$.
+\end{enumerate}
+In Chapter 5, we will use this definition of the Poisson process in the Uniform method for similarities.\\
+
+\textbf{Exponential Spacings Method}\\
+Let $T_1$, $T_2$, $\ldots$ be i.i.d. Exponential ($\lambda$) r.vs. and let
+\begin{equation}
+t_{n} = \sum_{k=1}^{n} T_k \hspace{0.5cm}t_0=0
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+Then $N(t) = max\{n: t_n \leq t\}$ is a Poisson process with rate $\lambda$
+\begin{itemize}
+    \item $t_n$: time of arrival of the $n$-th event
+    \item $T_n$: time between the $(n-1)$th and the $n$-th arrival ($t_n - t_{n-1}$)
+\end{itemize}
+
+
+
+\subsection{Compound Poisson process}
+- general def\\
+- mention some good jump-size distribution (exponetial, gamma,...), and say we will use Gamma jumps in subsequent processes.\\
+
+A Compound Poisson is defined by...\\
+
+\begin{equation}
+\sum_{k=N_{(n-1)\Delta t}+1}^{N_{n\Delta t}} x_{k}
+\label{eq:5-2 Gamma-OU BDLP Compound Poisson Approximation}
+\end{equation}\\
+\td{Finish the discussion on Compound Poisson processes by explaining how they can be used to approximate BDLP processes.}
+
+
+
+\subsection{Variance Gamma process}
+- Also 1 short def\\
+
+Use formulas simulation methods C5 to quickly set up defs\\
+

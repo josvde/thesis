@@ -1,0 +1,91 @@
+% ------------------------- Load packages ---------------------------
+% You can eventually add these while you load other packages
+% in case you want to integrate the titlepage with the rest of your thesis
+% -------------------------------------------------------------------
+\usepackage{graphicx,xcolor,textpos}
+\usepackage{helvet}
+\usepackage{geometry}
+\usepackage[toc,page]{appendix}
+\usepackage{hyperref}
+\usepackage{color}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    %linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=blue,  %choose some color if you want links to stand out
+    citecolor = blue
+}
+
+\renewcommand\familydefault{\sfdefault}
+\renewcommand{\contentsname}{Table of Contents}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+            {0ex\@plus -1ex \@minus -.25ex}%
+            {0.5ex \@plus .25ex}%
+            {\normalfont\normalsize\itshape}}
+\makeatother
+\setcounter{secnumdepth}{5} % how many sectioning levels to assign numbers to
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{0pt}}{}{}%
+\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{\vspace*{0pt}}{}{}%
+
+
+\makeatother
+
+\makeatletter
+\renewcommand{\@arrayparboxrestore}{\raggedright\normalfont}
+\makeatother
+
+\usepackage{ragged2e}
+% ------------------------ Page settings -----------------------------
+% If you change these, the cover layout will also change.  In that
+% case you have to adjust the latter manually.
+% --------------------------------------------------------------------
+
+\topmargin -10mm
+\textwidth 160truemm
+\textheight 240truemm
+\oddsidemargin 0mm
+\evensidemargin 0mm
+
+% ---------------------- textpos settings ----------------------------
+% Some additional settings for the cover
+% --------------------------------------------------------------------
+
+\definecolor{green}{RGB}{172,196,0}
+\definecolor{bluetitle}{RGB}{29,141,176}
+\definecolor{blueaff}{RGB}{0,0,128}
+\definecolor{blueline}{RGB}{82,189,236}
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{1mm}
+% ----------------------------------------------------------------------
+% ----- Additional packages & settings not provided by Template --------
+% ----------------------------------------------------------------------
+
+% Text formatting
+\setlength{\parindent}{0pt}
+\newcommand\td[1]{\textcolor{red}{\textbf{\scriptsize{#1}}}} % To do in red font
+\newcommand\walid[1]{\textcolor{green}{\textbf{\small{#1}}}} % bold blue font for formulas
+
+% Math notation packages
+\usepackage{amssymb}
+\usepackage{amsmath}
+\numberwithin{equation}{chapter}
+
+% Table formatting
+\usepackage{csvsimple}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{datatool}
+
+% List formatting
+\usepackage{enumitem}
+
+% LaTeX code formatting
+\usepackage{comment}
+
+% ----------------------------------------------------------------------
+
+

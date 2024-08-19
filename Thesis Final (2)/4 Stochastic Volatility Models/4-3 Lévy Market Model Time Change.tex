@@ -1,0 +1,30 @@
+\section{The Lévy SV Market model with Stochastic Time Change}
+
+The Lévy SV Market model does not have a SDE for the variance process like in BNS and Heston, but incorporates stochastic volatility by making time stochastic. As a result, when time runs faster volatility will increase.
+In essence the stochastic time change process replaces the need for a variance process and incorporates stochastic volatility directly in the price process. As a result, variance is simulated implicitly by simulating paths for the time-changed price process.\\
+
+In this approach, a distinction is made between economic time and calendar time, where for at each point in calendar time, an economic time value is determined through a process for the rate of time change. When the rate of time change process is integrated up to a time point t in calendar time, the elapsed economic time up until that point is calculated. This can be compared to determining the distance traveled by an object based on the integral of it's velocity function.\\
+
+Using economic time means that we are changing the speed at which our process experiences time. This might seem a less intuitive approach, but by looking at the big differences in volume traded between days, we can argue that trading significantly changes during high volume days. Traders will work longer, time available during the day becomes more valuable, there are more opportunities, more risks need to be monitored, etc. During these days this model will give an elapsed economic time that is higher than the elapsed calendar time. Subsequently, this increases the chances of having price-jumps and more randomness is experienced by the price process during that day.\\
+
+There are two conditions when choosing a model for the rate of time change, the rate of time change process needs to always be positive, i.e. we can't go back in time. And the integrated economic time process always needs to be increasing. When taking these conditions into account, there are multiple SDEs suitable. Compatible SDEs are Cox-Ingersoll-Ross processes and Gamma-OU and Inverse-Gaussian-OU (IG-OU) processes.\\
+
+We opt for a Cox-Ingersoll-Ross (CIR) process for the rate of time change process denoted $y=\{y_{t}, t \geq0 \}$. Under CIR $y=\{y_{t}, t \geq0 \}$ will be modeled by the SDE given below:
+
+$$d \hspace{0.1em} y_{t}=\kappa(\eta - y_{t})dt + \lambda y_{t}^{1/2} d\hspace{0.1em} W_{t}$$
+
+This SDE is used in Heston and the meaning of the parameters were explained in chapter on Heston. is similar to the mean reversion incorporated in the variance process in Heston. Only the volatility of the variance is now the volatility of the time change process and is defined by $\lambda$.\\
+
+With the CIR process defined above we can determine the elapsed economic time continuously for calendar time. $t$ by using the integrated CIR process for the elapsed economic time denoted $Y = \{Y_{t},t\geq0\}$, which is an integrated process as defined below:
+
+$$Y_{t}= \int_{0}^{t}y_{s}\, ds .$$
+
+With this process we can now model stochastic time in the Lévy process $X = \{X_{t},t\geq0\}$. The resulting process $X_{Y_{t}}$ is called a time-changed Lèvy process and yield the final Lévy SV Market, which combines the processes discussed above. The Lévy SV Market model with stochastic time is given by the SDE below:
+
+$$S_{t}=S_{0} \frac{exp((r-q)t)}{\mathbb{E}\,(exp(X_{Y_{t}})|y_{0})} $$
+
+In this thesis $X = \{X_{t},t\geq0\}$ will be a Variance Gamma process, where increments are independent, stationary and follow a VG$(\sigma,\nu,\theta)$ law. In order to determine the Lévy measure, the Variance Gamma process needs be expressed as the difference between 2 independent Gamma processes. As a result the original VG law is reparameterized by parameters $C, G \text{ and } M$ leading to the use of a VG($C,G,M$) distribution for the VG process. \\
+
+The resulting characteristic function of the log price price process under the Lévy SV Market Model incorporates both the VG and CIR processes and is given by:
+$$\text{\large $\phi_{\text{\tiny VG-CIR}}$}(u;C,G,M,\kappa,\eta,\lambda,y_{0})=\text{\large $\phi_{\text{\tiny VG-CIR}}$}(u;C y_{0},G,M,\kappa,\eta/y_{0},\lambda\sqrt{y_{0}},1) .$$
+Where on the right hand side the value for $y_{0}$, the rate of time change at the beginning of the CIR process is set to 1. This because $y_{0}$ is made redundant by the scaling property of the CIR process. As a result $C, \eta \text{ and } \lambda$ are rescaled as well.\\

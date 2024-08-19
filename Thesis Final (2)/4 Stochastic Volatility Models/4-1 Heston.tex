@@ -1,0 +1,10 @@
+
+\section{The Heston Model}
+
+In a 1993 paper by Heston, the volatility term in the GMB SDE above was made stochastic by introducing an OU process. This process models the square root of the variance, where Heston showed that the variance process follows a square-root process after applying Ito's Lemma. This type of process is called a CIR process after Cox, Ingersoll and Ross.\\
+
+The final result by Heston gave the following SDE:
+
+$$ d\sigma_t^2 = k(\theta - \sigma^2_t) dt + \gamma\,\sigma_t\hspace{0.1em} d \hspace{0.1em} \tilde{W}_t.$$
+
+As a result $\sigma^2$ is made stochastic under Heston and is replaced by $\sigma^2 = \{\sigma_{t}^2,t\geq0\}$.

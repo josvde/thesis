@@ -1,0 +1,281 @@
+
+\section{Addressing Price Discrepancies and Model Risk}
+
+---------------------
+%First red bullet point starts from here
+---------------------\\
+\textbf{Newton Raphson}
+(I don't understand some of the handwriting so please check)\\
+~\\
+Newton Raphson Fair Strike $K$.\\
+
+Denote $\tilde{K}$ as the Fair Swap Rate for a Capped Volatility Swap then $K=\tilde{K}^2$ becomes the Fair Swap Rate for a Variance Swap.
+
+From a vector of realized variances of size $n$, $K$ is calculated iteratively by minimizing the formula that gives the risk-neutral price, $K$ satisfies the following expression:
+
+\begin{equation}
+g(K) < \epsilon
+%\label{eq:foobar} %add label if required here
+\end{equation}
+where $g(K) = \mathds{E}(min(\sigma_{R}^2; 2.5K)) - K$, and $\epsilon$ a small number which serves as a stopping ceriterion in the iterative method.
+
+For $i=1,...,g-1$ \hspace{0.2cm} $g(K_i)>\epsilon$ and $g(K_2)<\epsilon$ then $K_\theta=K$ where we calculate these values by:
+
+\begin{equation}
+K_{i+1} = K_i - \frac{g(K_i)}{g'(K_i)} 
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+
+where
+\begin{equation}
+g(K_i) = \frac{1}{n} \left(\sum_{j=1}^{n} min (\sigma_{j}^2; 2,5K_i)\right) - K_i
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+and $g'(K_i)$ is given by:
+ 
+\begin{equation}
+g'(K_i) = \frac{[g(K_i) - g(K_{i-1})]}{K_i - K_{i-1}}
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+
+For large values of $n$, above $10^6$, $g$ remained relatively small and did not exceed $15$ in most cases.
+
+%First red bullet point ends  here
+~\\
+%Second red bullet point starts from here
+~\\
+~\\
+\textbf{Gamma process + random Gamma generators}\\\\
+We will describe a method to do this by simulation directly from
+
+\begin{equation}
+exp(-\lambda t)  \int_{0}^{\lambda t} exp(s) dz_s
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+rather than (by the techniques of Section 8.2) from the BDLP $z = z_t, t\geq0$. The idea is based on series representations. The required results can, in essence, be found in Marcus (1987) and Rosi\'{n}ski (1991). A self-contained overview is given in Barndorff-Nielsen and Shephard (2001b). Recent developments are surveyed in Rosi\'{n}ski (2001).
+
+Let $W$ be the L\'{e}vy measure of the BDLP $z$ and let $W^{-1}$ denote the inverse of the tail mass function $W^{+}$ as described in Section 5.2. The crucial result is that in law
+\begin{equation}
+\int_{0}^{t} f(s) dz_s = \sum_{j=1}^{\infty} W^{-1}(a_i/t) f(tu_i)
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+
+where {$a_i$} and {$u_i$} are two independent sequences of random variables with $u_i$ independent copies of a Uniform(0, 1) random variable and $a1 < \ldots < ai < \ldots$ as the arrival times of a Poisson process with intensity 1.
+It should be noted that the convergence of the series can be slow in some cases.
+~\\
+~\\
+\textbf{Simulation of Particular Process} \\
+\textbf{The Gamma Process} \\
+To simulate a Gamma process, we can use Gamma random number generator.
+~\\
+\textbf{Gamma Random Number Generators} \\
+First we note that, when $X$ is $Gamma(a,b)$, then, for $c>0$, $X/c$ is $Gamma(a,bc)$. So we need only a good generator for $Gamma(a,1)$ random numbers.
+Next, we give two possible generators for $Gamma(a,1)$ random numbers which should only be used for $a\leq1$ (which is the case in all of our examples). The first one is called Johnk’s Gamma generator (see Johnk 1964); the second one is Berman’s
+Gamma generator (see Berman 1971).
+~\\
+~\\
+\textbf{Johnk's Gamma Generator} 
+\begin{enumerate}
+    \item Generate two independent uniform random numbers $u_1$ and $u_2$.
+    \item Set $x=u_{1}^{1/a}$ and $y=u_{2}^{1/(1-a)}$.
+    \item If $x+y\leq1$, goto step 4, else goto step 1.
+    \item Generate an $Exp(1)$ random variable, i.e. $z=-log(u)$, where $u$ is a uniform random number.
+    \item Return the number $zx/(x+y)$ as the $Gamma(a,1)$ random number.
+\end{enumerate}
+
+~\\
+~\\
+\textbf{Berman's Gamma Generator} 
+\begin{enumerate}
+    \item Generate two independent uniform random numbers $u_1$ and $u_2$.
+    \item Set $x=u_{1}^{1/a}$ and $y=u_{2}^{1/(1-a)}$.
+    \item If $x+y\leq1$, goto step 4, else goto step 1.
+    \item Generate two independent uniform random numbers $u_1$ and $u_2$.
+    \item Return the number $-x log(u_1u_2)$ as the $Gamma(a,1)$ random number.
+\end{enumerate}
+
+Several other generators are described in the literature. We refer to Devroye (1986) for a detailed survey.
+~\\\\
+\textbf{Simulation of a Gamma Process} \\
+Next, it is easy to simulate a sample path of a Gamma process $G = {G_t , t\geq0}$, where $G_t$ follows a $Gamma(at, b)$ law. We simulate the value of this process at time points ${n\Delta t, n=0, 1, \ldots}$ as follows. First generate independent $Gamma(at, b)$ random numbers ${g_n, n\geq1}$ by, for example, the techniques described above. Note that since we assume $\Delta t$ to be very small, $a\Delta t$ is in most cases smaller than $1$ and we can use the Berman or Johnk generators. Then
+
+\begin{equation}
+G_0 = 0,\hspace{0.5cm} G_{n\Delta t} = G_{(n-1)\Delta t} + g_n, \hspace{0.5cm} n\geq1
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+
+Figure 8.4 shows a path of a Gamma process with parameters $a=10$ and $b=20$.
+
+~\\\\
+\textbf{The VG Process}\\
+\textbf{Simulation of a VG Process as the Difference of Two Gamma Processes}
+Since a VG process can be seen as the difference of two independent Gamma processes, simulation of a VG process is easy. More precisely, a VG process
+\begin{equation}
+X^{(VG)} = {X_{t}^{(VG)}, \hspace{0.5cm}t\geq0}
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+with parameters $C, G, M > 0$ can be decomposed as $X_{t}^{(VG)} = G_{t}^{(1)} - G_{t}^{(2)}$, where $G^{(1)} = {G_{t}^{(1)}, t\geq0}$ is a Gamma process with parameters $a=C$ and $b=M$ and $G^{(2)} = {G_{t}^{(2)}, t\geq0}$ is a Gamma process with parameters $a=C$ and $b=G$.
+
+Figure 8.5 shows a path of a VG process with parameters $C=20$, $G=40$ and $M=50$.
+
+~\\
+%Second red bullet point starts from here
+---------------------
+%3rd red bullet point, first file starts from here
+---------------------\\
+\textbf{Definition 1:} A Poisson Process as a Counting Process with stationary independent increments
+
+A counting process $N=\{N_t, t\geq0\}$ is a Poisson process with intensity parameter $\lambda$, $i\sigma$:
+\begin{enumerate}
+    \item The increments are stationary for $\mathscr{L}$, $s$ and $\Delta t\geq0:$\\
+    $P(N_{t+\Delta t} - N_t = \sigma) = P (N_{s+\Delta t} -N_s = \mathscr{L}$)
+    \item Additionally the increments are independent: $\forall 0\leq t_e \leq \ldots \leq t_\mathscr{L}$:\\
+    $N(t_1)-N(t_0)$, $N(t_2)-N(t_1)$, $\ldots$ , $N(\mathscr{L}) - N(\mathscr{L}-1)$\\
+    and follow a Poisson distribution with rate $\lambda$.
+\end{enumerate}
+In Chapter 5, we will use this definition of the Poisson process in the Uniform method for similarities.
+
+---------------------
+%3rd red bullet point, first file ends here
+%3rd red bullet point, second file starts here
+---------------------\\
+Let $T_1$, $T_2$, $\ldots$ be i.i.d. Exponential ($\lambda$) r.vs. and let
+\begin{equation}
+t_{n} = \sum_{k=1}^{n} T_k \hspace{0.5cm}t_0=0
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+Then $N(t) = max\{n: t_n \leq t\}$ is a Poisson process with rate $\lambda$
+\begin{itemize}
+    \item $t_n$: time of arrival of the $n$-th event
+    \item $T_n$: time between the $(n-1)$th and the $n$-th arrival ($t_n - t_{n-1}$)
+\end{itemize}
+
+---------------------
+%3rd red bullet point, second file ends here
+%4th red bullet point (table) stars here
+% (table values for HEST, BNS, VG-CIR & VG-OU)
+---------------------\\
+
+\begin{table}[h!]
+    \begin{tabular}{l}
+        \hline\hline
+        \textbf{HEST}\\
+        $\sigma^2_0 = 0.0654, \kappa = 0.6067, \eta = 0.0707, \theta = 0.2928, \rho = -0.7571$ \\
+        \hline
+        \textbf{BN-S}\\
+        $\rho = -4.6750, \lambda = 0.5474, b = 18.6075, a = 0.6069, \sigma^2_0 = 0.0433$ \\
+        \hline
+        \textbf{VG-CIR}\\
+        $C = 18.0968, G = 20.0276, M = 26.3971, \kappa = 1.2145, \eta = 0.5501, \lambda = 1.7913, y_0 = 1$ \\
+        \hline
+        \textbf{VG-OUT}\\
+        $C = 6.1610, G = 9.6443, M = 16.0260, \lambda = 1.6790, a = 0.3484, b = 0.7664, y_0 = 1$ \\
+         \hline\hline
+    \end{tabular}
+    \caption{Risk Neutral Parameters}
+\end{table}
+
+---------------------
+%4th red bullet point ends here
+%1st orange bullet point starts here
+---------------------\\
+
+\textbf{Fair Strike Algo}\\
+Update $g(K)$ based on $\sigma_{Ry}$ with $K=\tilde{K}^2$
+\begin{equation}
+g(K) = \mathbb{E}\left[min \left(\sum_{i=1}^n \sigma_{RD,n}^2; 2,5K\right)\right] - K
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+For simulations $s=1,\ldots, S$ we have $\sum_{i=1}^n \sigma_{RD}^2 \leq 2,5K$, as a result $\sum_{i=1}^n \sigma_{RD}^2 = \tilde{K}$, i.e. it estimates $K$ for a particular simulation $s$. By minimizing $g(K)$, we find $\tilde{K}$ through a Newton Raphson Scheme.
+
+~\\---------------------
+%1st orange bullet point ends here
+%2nd orange bullet point starts here
+---------------------\\
+
+\textbf{Feller Condition CIR-Process:} 
+Feller condition ensure $y_t$ does not become negative, which is an important condition when using a CIR-process to model variance and rate of time-change processes. Feller implies:
+\begin{equation}
+2\kappa \theta \geq \gamma^2
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+
+\begin{enumerate}
+    \item Absorption: if $y_i<0$, set $y_i=0$
+    \item Reflection: if $y_i<0$, set $y_i=|y_i|$
+    \item Partial truncation (Euler):\\
+    $\tilde{y}_{i+1} = \tilde{y_i} +\kappa(\eta -\tilde{y}_i)\Delta t + \theta \sqrt{max(0,\tilde{y}_i)} \sqrt{\Delta t} \epsilon^2 $\\
+    $y_{i+1} = max (0,\tilde{y}_{i+1})$
+    \item Full truncation (Euler):\\
+        $\tilde{y}_{i+1} = \tilde{y_i} +\kappa(\eta -max(0,\tilde{y}_i))\Delta t + \theta \sqrt{max(0,\tilde{y}_i)} \sqrt{\Delta t} \epsilon^2 $\\
+    $y_{i+1} = max (0,\tilde{y}_{i+1})$ 
+\end{enumerate}
+
+~\\~\\---------------------
+%2nd orange bullet point ends here
+%3rd orange bullet point, part1 starts here
+---------------------\\
+
+\begin{enumerate}
+    \item Sample (two matrices of) independent standard normal
+random numbers, $\epsilon$ and $\epsilon^*$.
+    \item Define:\\ $\epsilon^1 = \epsilon$ \\ $\epsilon^2 = \rho\epsilon + \sqrt{1-\rho^2}\epsilon^*$
+\end{enumerate}
+
+~\\~\\---------------------
+%3rd orange bullet point, part1 ends here
+%3rd orange bullet point, part2 starts here
+---------------------\\
+\textbf{Stock price simulation in the Heston model}\\\\ 
+\textbf{Milstein scheme:}\\\\ 
+
+\begin{equation}
+S_{i+1} =  S_i\left(1+ (r-q)\Delta t + \sqrt{\sigma_i\Delta t} \ \epsilon_{i}^1\right)
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+
+\begin{equation}
+v_{i+1} =  \sigma_i + \left(\kappa(\theta - \sigma_i) - \frac{\gamma^2}{4}\right)\Delta t + \gamma\sqrt{\sigma_i\Delta t} \ \epsilon_{i}^2 + \frac{\gamma^2}{4} \Delta t (\epsilon_{i}^2)^2
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+where $\epsilon^1$ and $\epsilon^2$ are correlated standard normal random numbers (with correlation $\rho$).
+
+~\\~\\---------------------
+%3rd orange bullet point, part2 ends here
+%4th orange bullet point, part1 starts here
+---------------------\\
+\textbf{The Gamma–OU Process}\\
+The $Gamma(a, b)$ process has a L\'evy density (living on the positive real line) given by
+$u(x) = ab exp(-bx)/1_{(x>0)}$. Using the criterion (5.3), the $Gamma(a, b)$ distribution is clearly self-decomposable. Using relation (5.5), the corresponding BDLP $z$ has L\'evy density
+\begin{equation}
+w(x) = ab \ exp(-bx)1_{(x>0)}
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+
+The associated cumulant function is given by
+\begin{equation}
+k(u) = -au (b + u)^{-1}
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+
+From this we can easily derive that the BDLP for the $Gamma(a, b)-OU$ process is
+a compound Poisson process, i.e.
+\begin{equation}
+z_t = \sum_{n=1}^{N_t}x_n, 
+\end{equation}
+
+where $N = {N_t, t\geq0}$ is a Poisson process with intensity parameter $a$, i.e. $E[N_t] = at$ and ${x_n, n=1,2,\ldots}$ is an independent and identically distributed sequence; each $x_n$ follows a $Gamma(1,b)$ law. Since the BDLP is compound Poisson, it only jumps a finite number of times in every compact interval. Hence, the $Gamma-OU$ process also jumps a finite number of times in every compact (time) interval.
+~\\~\\---------------------
+%4th orange bullet point, part1 ends here
+%4th orange bullet point, part2 starts here
+---------------------\\
+Process $z={z_t, t\geq0}$ is a compound-Poisson process:
+\begin{equation}
+z_t = \sum_{n=1}^{N_t}x_n, 
+\end{equation}
+
+where $N = {N_t, t\geq0}$ is a Poisson process with intensity parameter $a$, i.e. $E[N_t] = at$ and ${x_n, n=1,2,\ldots}$ is an independent and identically distributed sequence; each $x_n$ follows an exponential law with mean $1/b$.
+
+~\\---------------------
+%4th orange bullet point, part2 ends here
+---------------------\\

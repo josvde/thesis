@@ -1,0 +1,11 @@
+
+\section{Analytical Solutions solving the Risk-Neutral Price}
+
+When variance is modeled by a stochastic process, the square root of this process is the volatility process. The latter can be used to find fair strike values for VOSWs. However; taking a square root of a stochastic process doesn't come without additional complexities. These problems were addressed by (Brockhaus and Long) and they proposed the following approximation formula:
+
+\begin{equation}
+    \mathbb{E}^\mathbb{Q}[\sqrt{\sigma_{r}^2}]\approx\sqrt{\mathbb{E}^\mathbb{Q}[\sigma_{r}^{2}]} - \frac{Var[\sigma_{r}^{2}]}{8\cdot \mathbb{E}^\mathbb{Q}[\sigma_{r}^{2}]^{\frac{3}{2}}}
+    \label{eq:sqrProcess}
+\end{equation}
+
+where the expected value of the volatility process is approximated with terms that can be calculated directly from the variance process. A correction for the convexity bias between results from the variance and volatility process is done on the right hand side, where special attention should be given to the $Var[\sigma_{r}^{2}]$ term, that represent the variance on the variance process itself.\\

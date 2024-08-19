@@ -1,0 +1,146 @@
+% ----- Cover Master Thesis Faculty of Economics and Business -------
+% This template is adapted from the Faculty of Science.
+% -------------------------------------------------------------------
+\RequirePackage{fix-cm}
+\documentclass[12pt,a4paper,oneside]{report}
+\input{9 MainFormat/Formatting}
+
+\begin{document}
+\input{0 Begin/Cover-Abstract}
+
+% ------------------------- First pages ---------------------------
+% For table of contents, acknowlegments, ...
+% -----------------------------------------------------------------
+%\rmfamily
+
+\setcounter{page}{0}
+\pagenumbering{roman}
+
+\chapter*{Acknowledgements}
+\input{0 Begin/Acknowledgements}
+\newpage
+
+\tableofcontents
+\newpage
+
+\setcounter{page}{0}
+\pagenumbering{arabic}
+
+\addcontentsline{toc}{chapter}{General Introduction}
+\chapter*{General Introduction}
+\input{0 Begin/General-Intro}
+\newpage
+
+\chapter*{Nomenclature}
+\input{0 Begin/Nomenclature}
+
+\chapter{Literature Review}
+\input{1 Literature Review/StochProcess}
+
+
+
+\chapter{Pricing Methodologies for Capped Volatility Swaps}
+\input{2 Pricing Methodologies/2-1 Risk Neutral}
+\input{2 Pricing Methodologies/2-2 Monte Carlo Pricing}
+\input{2 Pricing Methodologies/2-3 Analytical expression}
+
+
+
+\chapter{Stochastic Processes}
+\input{3 Stochastic Processes/3-1 Geometric Brownian Motion}
+\input{3 Stochastic Processes/3-2 Lévy Processes}
+\input{3 Stochastic Processes/3-3 Advanced Processes}
+
+
+\chapter{Models incorporation Stochassdfdtic Volatility}
+\input{4 Stochastic Volatility Models/4-1 Heston}
+\input{4 Stochastic Volatility Models/4-2 BNS}
+\input{4 Stochastic Volatility Models/4-3 Lévy Market Model Time Change}
+\input{4 Stochastic Volatility Models/4-4 Calibration on Euro Stoxx 50}
+
+
+\chapter{Simulation Methods for Stochastic Volatility Models}
+\input{5 Simulation Methods/5-1 General Concepts Numerical Techniques}
+\input{5 Simulation Methods/5-2 Simulating Lévy and OU/5-2 Simulating Lévy and OU}
+\input{5 Simulation Methods/5-3 Simulating SV models/5-3 Simulating SV models}
+
+\chapter{Results}
+\input{6 Results/6-1 Realized Variance distributions/6-1 Realized Variance distributions}
+\input{6 Results/6-2 Fair Swap Price/6-2 Fair Swap Price}
+\input{6 Results/6-3 Addressing Price Discrepancies/6-3 Addressing Price Discrepancies}
+% if possible price and discuss Skewness Swaps
+
+\chapter{Conclusions}
+
+
+
+\newpage
+
+% Ending content
+\bibliographystyle{apalike}
+\bibliography{refs} % Entries are in the refs.bib file
+\addcontentsline{toc}{chapter}{Sources}
+\clearpage
+
+\listoffigures
+\addcontentsline{toc}{chapter}{List of figures}
+\clearpage
+
+\listoftables
+\addcontentsline{toc}{chapter}{List of tables}
+\clearpage
+
+\begin{appendices}
+    \section*{Appendix 1: Title of appendix 1}
+
+    Content of appendix 1
+
+    \section*{Appendix 2: Title of appendix 2}
+
+    Content of appendix 2
+\end{appendices}
+
+
+
+
+% ----------------------- Back cover ------------------------------
+% Please fill in:
+% - Department
+% - Department's address
+% - Telephone number and fax number
+% -----------------------------------------------------------------
+
+\newpage
+\thispagestyle{empty}
+\sffamily
+%
+\begin{textblock}{191}(92,-11)
+{\color{blueline}\rule{217pt}{5.5pt}}
+\end{textblock}
+%
+\begin{textblock}{191}(168,-11)
+{\color{blueline}\rule{5.5pt}{80pt}}
+\end{textblock}
+%
+\begin{textblock}{183}(-27,-5)
+\textblockcolour{}
+\flushright
+\fontsize{8}{10}\selectfont
+\textbf{FACULTY OF BUSINESS AND ECONOMICS}\\
+www.feb.kuleuven.be\\
+\end{textblock}
+%
+\begin{textblock}{191}(152,-7)
+\textblockcolour{}
+\includegraphics*[height=24truemm]{9 MainFormat/sedes}
+\end{textblock}
+%
+\begin{textblock}{191}(-20,235)
+{\color{bluetitle}\rule{544pt}{55pt}}
+\end{textblock}
+%
+\begin{textblock}{191}(125, 208)
+\textblockcolour{}
+\includegraphics*[height=15truemm]{9 MainFormat/LogoKULASSOC}
+\end{textblock}
+\end{document}

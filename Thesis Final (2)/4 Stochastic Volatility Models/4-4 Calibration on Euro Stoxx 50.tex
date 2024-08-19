@@ -1,0 +1,52 @@
+
+\section{Calibrated Model Parameters on the EURO STOXX 50 Index}
+
+\walid{All calibrated parameter have to presented in 1 table, the values are given in the pdf. The table can be copied, as this are the values I use.}\\
+
+
+Calibrating parameters is done through an optimization, where the Carr and Madam formula is used.The final resulting values minimize the error between the theoretical option prices and the available market price data. We will use results from (Schoutens 2003) where parameters were calibrated to an implied volatility surface resulting on market data of the Eurostoxx 50 index on 7 October 2003.
+
+For the calibration on Heston on the EURO STOXX 50 data, the condition is met, however it is not met in both Time Change models using a CIR-process as a stochastic clock.
+
+The results are given below \ref{tab:HestonParamters}.\\
+
+
+\begin{table}[h!]
+    \begin{tabular}{l}
+        \hline\hline
+        \textbf{HEST}\\
+        $\sigma^2_0 = 0.0654, \kappa = 0.6067, \theta = 0.0707, \gamma = 0.2928, \rho = -0.7571$ \\
+        \hline
+        \textbf{BN-S}\\
+        $\rho = -4.6750, \lambda = 0.5474, b = 18.6075, a = 0.6069, \sigma^2_0 = 0.0433$ \\
+        \hline
+        \textbf{VG-CIR}\\
+        $C = 18.0968, G = 20.0276, M = 26.3971, \kappa = 1.2145, \eta = 0.5501, \lambda = 1.7913, y_0 = 1$ \\
+        \hline
+        \textbf{VG-OUT}\\
+        $C = 6.1610, G = 9.6443, M = 16.0260, \lambda = 1.6790, a = 0.3484, b = 0.7664, y_0 = 1$ \\
+         \hline\hline
+    \end{tabular}
+    \caption{Risk Neutral Parameters}
+\end{table}
+
+\newpage
+
+If time discuss calibration optimization\\
+
+ \begin{equation}
+    rmse = \sum_{options} \frac{(Market \ price - Model \ price)^2}{number \ of \ options} 
+    \label{eq:rmse}
+\end{equation}
+
+   
+
+ \begin{equation}
+    ape =  \frac{1}{mean \ option \ price}   \sum_{options} \frac{|Market \ price - Model \ price|}{number \ of \ options}
+    \label{eq:ape}
+\end{equation}
+
+ \begin{equation}
+    aae =  \sum_{options} \frac{|Market \ price - Model \ price|}{number \ of \ options}
+    \label{eq:ape}
+\end{equation}

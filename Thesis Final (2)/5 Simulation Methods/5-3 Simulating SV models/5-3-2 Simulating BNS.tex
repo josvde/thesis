@@ -1,0 +1,30 @@
+
+\subsection{Simulating the Barndorff-Nielsen-Sheppard Model}
+
+The SDE of BNS in~(\ref{eq:4.2 log-price BNS}) can be simulated using the following discretization scheme:
+
+\begin{equation}
+    Z_{n\Delta t} = Z_{(n-1)\Delta t}\hspace{0.1em} +\hspace{0.1em} (\mu - \tfrac{1}{2} \sigma_{n\Delta t}^2)\Delta t\hspace{0.1em} +\hspace{0.1em} \sigma_{n\Delta t}\hspace{0.1em} \sqrt{\Delta t}\hspace{0.05em} \epsilon_{n} + \rho(z_{\lambda n\Delta t}-z_{\lambda (n-1)\Delta t}).
+\label{eq:5.3 BNS log-price discretization}
+\end{equation}\\
+
+Where $\mu = r - q - \lambda \hspace{0.08em} k(-\rho)$ is a constant value, and where the function $k(u)$ is defined by the Gamma-OU process.\\
+
+The Gamma-OU process for the variance $\sigma^2=\{\sigma_{t}^2,t\geq 0\}$ is given by:
+
+\begin{equation}
+\sigma_{n\Delta t}^2 = (1 - \lambda \Delta t) \sigma_{(n-1)\Delta t}^2 + z_{\lambda n \Delta t}-z_{\lambda (n-1)\Delta t} \notag\\
+\label{eq:5-3 BNS variance discretization}
+\end{equation}\\
+
+where $\sigma_{0}^2$ is given by calibration.\\
+
+In~(\ref{eq:5.3 BNS log-price discretization}) the log-price process $Z = \{ Z_{t}, t \geq 0\}$ is simulated simultaneously with the variance process $\sigma^2=\{\sigma_{t}^2,t\geq 0\}$. Both differential equations require simulated values for the BDLP $z=\{{z}_t,t\geq 0\}$, such that the same jump process is used twice. This ensures that positive jumps in the variance process, directly results in a negative jumps in the log price process, which captures the leverage effect between price and variance which is incorporated by a negative value for $\rho$.\\
+
+
+The simulation methods discussed above are used to simulate the BDLP, where the time-subscript for the Gamma-OU variance process, equals $\lambda n \Delta t$ for $n=0,1,2,...,N$. Under BNS this is important, as this adds an additional jump scaling factor. In short, $\lambda$ scales the jump arrivals times, while not impacting the simulation interval size $\Delta t$ for the other processes. The Compound Poisson approximation for the BDLP is simulated in the same time points as the other processes in~(\ref{eq:5.3 BNS log-price discretization}) and~(\ref{eq:5-3 BNS variance discretization}).\\
+
+In this section we also want to focus on the interpretation of the calibrated parameters, and other relevant concepts that can aid in the implementation of the simulation methods. A first thing to note is that the jump arrival t 
+
+
+

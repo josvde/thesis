@@ -1,0 +1,8 @@
+
+\section{Simulating Price Paths under Stochastic Volatility Models}
+
+For the pricing of our volatility swaps with the models of this section, we opt for a time horizon $T$ of one year, and a simulation interval  $\Delta t$ of one day. When we assume there are 252 trading days in 1 year $\Delta t = \frac{1}{252}$ and $N = 252 \cdot \hspace{0.1em}T = 252$. So the simulation step numbers $n = 0,1,2,...,N$ will remain the same for all models. It is important to mention these choices before delving into the individual simulation methods of each model, as it helps in establishing a baseline that can aid in understanding how the BNS Model and Lévy Market Models increase the time-complexity by changing how $\Delta t$ and $N$ are used. These time characteristics must be monitored closely to see how it impacts the price path simulations between models.\\
+
+\input{5 Simulation Methods/5-3 Simulating SV models/5-3-1 Simulating Heston}
+\input{5 Simulation Methods/5-3 Simulating SV models/5-3-2 Simulating BNS}
+\input{5 Simulation Methods/5-3 Simulating SV models/5-3-3 Simulating Lévy Market Models}

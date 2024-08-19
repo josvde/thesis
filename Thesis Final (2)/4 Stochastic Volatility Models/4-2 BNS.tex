@@ -1,0 +1,19 @@
+
+\section{The Barndorff-Nielsen-Sheppard (BNS) model}
+
+Barndoff-Nielsen proposed an Ornstein-Uhlenback (OU) process as a choice for $\sigma^2=\{\sigma_{t}^2,t\geq 0\}$ taking the form of:
+
+\begin{equation}
+    d\hspace{0.1em}\sigma_{t}^2=-\lambda \sigma_{t}^2dt + d\hspace{0.05em} z_{\lambda t}.
+    \label{eq:4.2 variance BNS}
+\end{equation}\\
+Where $z=\{z_t,t\geq 0\}$ is the Background Driving Lévy Process (BDLP), which is a Lévy process with positive increments that can be seen as a subordinator. Barndorff-Nielsen showed that the resulting dynamics of the log price process under an equivalent martingale measure $Q$ are given by:
+
+\begin{equation}
+    d\hspace{0.05em} Z_{t} = (r-q-\lambda \hspace{0.08em} k(-\rho) - \tfrac{1}{2} \sigma_{t}^2)dt + \sigma_{t}\hspace{0.1em} d  \hspace{0.05em} W_{t} + \rho \hspace{0.15em} d z_{\lambda t}
+    \label{eq:4.2 log-price BNS}
+\end{equation}
+
+where the Brownian Motion ${W} = \{W_{t},t\geq0\}$ is independent of the BDLP $z=\{{z}_t,t\geq 0\}$.\\
+
+The BDLP $z=\{{z}_t,t\geq 0\}$ incorporates jumps and is used in both the log price process as the variance process to ensure jumps in price occur simultaneously with jumps in variance. The function $k(u)=k^{Q}(u) = log\hspace{0.1em}\mathbb{E}^\mathbb{Q} [ exp(-uz_{1})]$ represents the cumulant function of $ z_{1} $ under $Q$. This function k can be defined by assigning a Lévy density to the BDLP. In this thesis we will choose to assign a Gamma density, as a result $\sigma^2=\{\sigma_{t}^2,t\geq 0\}$ follows and Gamma-OU process in~(\ref{eq:OU-BNS}).\\

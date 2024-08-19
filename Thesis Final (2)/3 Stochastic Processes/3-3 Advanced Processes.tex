@@ -1,0 +1,50 @@
+
+\section{Advanced processes}
+
+\subsection{OU-process}
+- general def with rate parameter lambda and BDLP\\
+
+
+Ornstein-Uhlenback (OU) process for $\sigma^2=\{\sigma_{t}^2,t\geq 0\}$ is defined by:
+
+\begin{equation}
+    d\hspace{0.1em}\sigma_{t}^2=-\lambda \sigma_{t}^2dt + d\hspace{0.05em} z_{\lambda t}.
+    \label{eq:OU-BNS}
+\end{equation}
+
+Where $z=\{z_t,t\geq 0\}$ is the Background Driving Lévy Process (BDLP), which is a Lévy process with positive increments that can be seen as a subordinator.\\
+
+Define the BDLP as a compound Poisson with Gamma jumps\\
+
+
+
+We will describe a method to do this by simulation directly from
+
+\begin{equation}
+exp(-\lambda t)  \int_{0}^{\lambda t} exp(s) dz_s
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+rather than (by the techniques of Section 8.2) from the BDLP $z = z_t, t\geq0$. The idea is based on series representations. The required results can, in essence, be found in Marcus (1987) and Rosi\'{n}ski (1991). A self-contained overview is given in Barndorff-Nielsen and Shephard (2001b). Recent developments are surveyed in Rosi\'{n}ski (2001).
+
+Let $W$ be the L\'{e}vy measure of the BDLP $z$ and let $W^{-1}$ denote the inverse of the tail mass function $W^{+}$ as described in Section 5.2. The crucial result is that in law
+\begin{equation}
+\int_{0}^{t} f(s) dz_s = \sum_{j=1}^{\infty} W^{-1}(a_i/t) f(tu_i)
+%\label{eq:foobar} %add label if required here
+\end{equation} 
+
+where {$a_i$} and {$u_i$} are two independent sequences of random variables with $u_i$ independent copies of a Uniform(0, 1) random variable and $a1 < \ldots < ai < \ldots$ as the arrival times of a Poisson process with intensity 1.
+It should be noted that the convergence of the series can be slow in some cases.\\
+
+Use formulas simulation methods C5 to quickly set up defs\\
+
+\subsection{Cox-Ingersoll-Ross process}
+
+In a paper... Cox-Ingersoll Ross proposed a square root OU-process given by:
+
+$$ dy_t = k(\theta - y_t) dt + \gamma\,\sqrt{y_t}\hspace{0.1em} d \hspace{0.1em} \tilde{W}_t.$$
+
+This process process incorporates a mechanism of mean-reversion by introducing a long term mean $\theta \text{, mean reversion speed }\kappa$, and $\gamma$ as the volatility the process $y_t $.\\
+
+\textbf{Feller condition\\}
+The Feller condition ensure that the square root process remains positive, if the calibrated parameters don't satisfy the condition, there are different options to solve this problem, and we will explain absorption, reflection and truncation as remedies.
+

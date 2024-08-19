@@ -1,0 +1,7 @@
+
+\subsection{Cox-Ingersoll-Ross processes}
+
+Simulations for the price process $S_{t}$ under Heston are realized by using the following Euler discretization scheme:
+$$S_{t_{i+1}} = S_{t_{i}}(1+(r-q)\Delta t + \sigma_{t_{i}} \sqrt{\Delta t} \hspace{0.2em}\epsilon_{1})$$
+$$\sigma_{t_{i+1}}^2 = \sigma_{t_{i}}^2 + \kappa(\theta - \sigma_{t_{i}}^2)\Delta t + \gamma \sigma_{t_{i}}\sqrt{\Delta t} \hspace{0.2em}\epsilon_{2}$$\\
+Where $\epsilon_{1}$ and $\epsilon_{2}$ are correlated standard normals.\\

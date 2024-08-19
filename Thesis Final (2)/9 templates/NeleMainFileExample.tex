@@ -1,0 +1,178 @@
+\RequirePackage{fix-cm}
+\documentclass[11pt,a4paper,twoside, openright]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx,textpos}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{mygray}{HTML}{454545}
+\usepackage{array}
+\usepackage{rotating}
+\usepackage{tikz}
+\usepackage{pifont}
+\usepackage{helvet}
+\usepackage{lipsum}
+\usepackage[subtle]{savetrees}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage[numbers, sort&compress]{natbib}
+\usepackage{textgreek}
+\usepackage{emptypage}
+\usepackage{tocloft}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength\headheight{15.5pt}
+\usepackage{wrapfig}
+\usepackage[export]{adjustbox}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{subfig}
+\usepackage[labelfont={bf, color=mygray},textfont={normalfont, color=mygray}]{caption}
+\usepackage{subfig}
+\usepackage[font={small,it}]{caption}
+\usepackage{silence}
+\WarningFilter{latex}{Text page}
+\usepackage[export]{adjustbox}
+\usepackage[toc,page,titletoc]{appendix}
+%--------------------HEADER----------------------------
+
+\renewcommand{\chaptermark}[1]{%
+\markboth{\thechapter.\ #1}{}}
+
+\fancyhead[LE,RO]{\textsl{\rightmark}}
+\fancyhead[LO,RE]{\textsl{\leftmark}}
+\fancyheadoffset[LE,RO]{0cm}
+%---------------------------------------------------------------------
+\usepackage{setspace}
+\onehalfspacing
+
+%toevoegen van mendeley library
+
+
+
+% instellingen voor hoofdstuknummering en inhoudstafel
+\setcounter{secnumdepth}{5} 
+\setcounter{tocdepth}{5}
+
+% instelling om telkens hoofdstuk op een oneven pagina te starten. Mogelijks moet de "cleardoublepage" dan niet gebruikt worden na elk hoofdstuk --> checken wanneer printen. 
+
+\newcommand*\cleartoleftpage{%
+  \clearpage
+  \ifodd\value{page}\hbox{}\newpage\fi
+}
+
+% pagina-instellingen
+\topmargin -10mm
+\textwidth 160truemm
+\textheight 240truemm
+\oddsidemargin 0mm
+\evensidemargin 0mm
+
+% kleuren definiëren
+\definecolor{green}{RGB}{172,196,0}
+\definecolor{bluetitle}{RGB}{29,141,176}
+\definecolor{blueaff}{RGB}{0,0,128}
+\definecolor{blueline}{RGB}{82,189,236}
+
+% define units for the text blocks
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{1mm}
+
+\begin{document}
+%%Titlepage
+\input{Titlepage.tex}\cleardoublepage 
+\rmfamily
+%%Copywright
+\input{Copywright.tex} \cleardoublepage
+
+%%Acknowledgements
+\pagenumbering{roman}
+\chapter*{Acknowledgements}
+\input{Acknowledgements.tex}
+\addcontentsline{toc}{chapter}{Acknowledgements}
+\newpage
+
+%%Table of contents
+\tableofcontents
+\fancyhf{}
+\fancyhead[LE]{\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark}}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4} 
+\addcontentsline{toc}{chapter}{Table of contents}
+\newpage
+
+%%List of figures
+\listoffigures
+\fancyhf{}
+\cfoot{\thepage}
+\addcontentsline{toc}{chapter}{List of figures}
+
+%%List of abbreviations
+\chapter*{Abbreviations}
+\fancyhf{}
+\cfoot{\thepage}
+\input{Abbreviations.tex}
+\addcontentsline{toc}{chapter}{Abbreviations}
+
+%%Summary
+\chapter*{Summary}
+\input{Summary.tex}
+\addcontentsline{toc}{chapter}{Summary}
+
+%%Samenvatting
+\chapter*{Samenvatting}
+\input{Samenvatting.tex}
+\addcontentsline{toc}{chapter}{Samenvatting}
+
+%%Voorste deel
+\mainmatter
+\setcounter{page}{0}
+\pagenumbering{arabic}
+
+\fancyhf{}
+\renewcommand{\chaptermark}[1]{%
+\markboth{\thechapter.\ #1}{}}
+\fancyhead[LE]{\textsl{\rightmark}}
+\fancyhead[RO]{\textsl{\leftmark}}
+\cfoot{\thepage}
+
+%%Chapters
+\input{Introduction.tex}
+\cleardoublepage
+
+\input{Objectives}
+\cleardoublepage
+
+\input{Statement}
+\cleardoublepage
+
+\input{MM.tex}
+\cleardoublepage
+
+\input{Results.tex}
+\cleardoublepage
+
+\input{Conclusion.tex}
+\cleardoublepage
+
+\backmatter
+%%Bibliography
+\fancyhf{}
+\fancyhead[LE]{\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark}}
+\cfoot{\thepage}
+\bibliography{Bibliography.bib}
+\bibliographystyle{ieeetr}
+\addcontentsline{toc}{chapter}{Bibliography} 
+\cleardoublepage
+
+\appendix
+\chapter{Supplementary material}
+\input{appendix.tex} \cleardoublepage
+%\cleartoleftpage{} % zorgt dat de achterflap op een even pagina staat
+\input{Coverpage.tex}
+
+\end{document}

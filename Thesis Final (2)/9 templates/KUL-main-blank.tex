@@ -1,0 +1,363 @@
+% ----- Cover Master Thesis Faculty of Economics and Business -------
+% This template is adapted from the Faculty of Science.
+% -------------------------------------------------------------------
+\RequirePackage{fix-cm}
+\documentclass[12pt,a4paper,oneside]{report}
+
+% ------------------------- Load packages ---------------------------
+% You can eventually add these while you load other packages
+% in case you want to integrate the titlepage with the rest of your thesis
+% -------------------------------------------------------------------
+\usepackage{graphicx,xcolor,textpos}
+\usepackage{helvet}
+\usepackage{geometry}
+\usepackage[toc,page]{appendix}
+\usepackage{hyperref}
+\usepackage{color}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    %linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=blue,  %choose some color if you want links to stand out
+    citecolor = blue
+}
+
+\renewcommand\familydefault{\sfdefault}
+\renewcommand{\contentsname}{Table of Contents$^1$}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+            {0ex\@plus -1ex \@minus -.25ex}%
+            {0.5ex \@plus .25ex}%
+            {\normalfont\normalsize\itshape}}
+\makeatother
+\setcounter{secnumdepth}{5} % how many sectioning levels to assign numbers to
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{0pt}}{}{}%
+\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{\vspace*{0pt}}{}{}%
+\makeatother
+
+\makeatletter
+\renewcommand{\@arrayparboxrestore}{\raggedright\normalfont}
+\makeatother
+
+\usepackage{ragged2e}
+% ------------------------ Page settings -----------------------------
+% If you change these, the cover layout will also change.  In that
+% case you have to adjust the latter manually.
+% --------------------------------------------------------------------
+
+\topmargin -10mm
+\textwidth 160truemm
+\textheight 240truemm
+\oddsidemargin 0mm
+\evensidemargin 0mm
+
+% ---------------------- textpos settings ----------------------------
+% Some additional settings for the cover
+% --------------------------------------------------------------------
+
+\definecolor{green}{RGB}{172,196,0}
+\definecolor{bluetitle}{RGB}{29,141,176}
+\definecolor{blueaff}{RGB}{0,0,128}
+\definecolor{blueline}{RGB}{82,189,236}
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{1mm}
+
+%% additional stuff I added %%
+\setlength{\parindent}{0pt}
+\begin{document}
+% ----------------------- Cover --------------------------------------
+% Please fill in:% - The title and subtitle (if applicable)
+%         to include a formula in the title or subtitle
+%         use  \form{$...$}
+% - Your name
+% - Your (co)supervisor, mentor (if applicable)
+% - Your master
+% - The academic year
+% --------------------------------------------------------------------
+\thispagestyle{empty}
+\newcommand{\form}[1]{\scalebox{1.087}{\boldmath{#1}}}
+\sffamily
+%
+\begin{textblock}{191}(-24,-11)
+\colorbox{bluetitle}{\hspace{95mm}\ \parbox[c][18truemm]{94mm}{\textcolor{white}{FACULTY OF ECONOMICS AND BUSINESS}}}
+\end{textblock}
+%
+\begin{textblock}{70}(-18,-19)
+\textblockcolour{}
+\includegraphics*[height=19.8truemm]{LogoKULeuven}
+\end{textblock}
+%
+\begin{textblock}{160}(-6,50)
+\textblockcolour{}
+\vspace{-\parskip}
+\flushleft
+\fontsize{40}{42}\selectfont \textcolor{bluetitle}{Stochastic Volatility Models for Pricing Volatility Swaps}\\[1.5mm]
+\fontsize{20}{22}\selectfont Addressing Model Selection Risk in Pricing with Monte Carlo Methods
+\end{textblock}
+%
+\begin{textblock}{160}(15,153)
+\textblockcolour{}
+\vspace{-\parskip}
+\flushright
+\fontsize{14}{16}\selectfont \textbf{Jos Van den Eynde}\\[6pt]
+\fontsize{8}{10}\selectfont R0758751
+\end{textblock}
+%
+\begin{textblock}{160}(15,173)
+\textblockcolour{}
+\vspace{-\parskip}
+\flushright
+Thesis submitted to obtain the degree of\\[4.5pt]
+MASTER OF ACTUARIAL AND FINANCIAL ENGINEERING\\[4.5pt]
+\end{textblock}
+%
+\begin{textblock}{160}(15,215)
+\textblockcolour{}
+\vspace{-\parskip}
+\flushright
+Promoter: Prof. Dr. Wim Schoutens\\[4.5pt]
+Academic year 2023-2024
+\end{textblock}
+%
+\begin{textblock}{191}(-24,248)
+{\color{blueline}\rule{550pt}{5.5pt}}
+\end{textblock}
+%
+\vfill
+\newpage
+
+\thispagestyle{empty}
+
+
+\setlength{\parindent}{0pt}
+\makeatletter
+\renewcommand{\@arrayparboxrestore}{\raggedright\normalfont}
+\makeatother
+
+\begin{textblock}{191}(-24,-11)
+\colorbox{bluetitle}{\hspace{95mm}\ \parbox[c][18truemm]{94mm}{\textcolor{white}{FACULTY OF ECONOMICS AND BUSINESS}}}
+\end{textblock}
+%
+\begin{textblock}{70}(-18,-19)
+\textblockcolour{}
+\includegraphics*[height=19.8truemm]{LogoKULeuven}
+\end{textblock}
+%
+\begin{textblock}{160}(-6,50)
+\textblockcolour{}
+\vspace{-\parskip}
+\flushleft
+\fontsize{40}{42}\selectfont \textcolor{bluetitle}{Stochastic Volatility Models for Pricing Volatility Swaps}\\[1.5mm]
+\fontsize{20}{22}\selectfont Addressing Model Selection Risk in Pricing with Monte Carlo Methods\\[5.5mm]
+\fontsize{10}{12}\selectfont \justify
+In this thesis, we compare the pricing of Volatility Swaps (VOSWs) using different Stochastic Volatility (SV) models, where the price is modeled by Stochastic Differential Equations (SDEs) employing various stochastic processes. Sometimes it is necessary to derive a process for the natural logarithm of the price, referred to as the log-price process. For the pricing of VOSWs, we need the variance on the returns, not the variance of the prices. Consequently, we use log-returns to calculate the realized variance, and this can be done from both the price process and the log-price process. \\
+
+Subsequently, we will investigate pricing methods with the Heston model, Barndorff-Nielsen and Shephard (BNS) model, and the Lévy Stochastic Time Change model. These SV models all incorporate SV differently, either by means of a variance process or alternatively by means of a stochastic process for the rate of time change. The latter incorporates stochastic volatility indirectly by making time stochastic within other processes of the price SDE. These stochastic time dynamics are a solid alternative to the use of variance processes. For each model, we formally describe the reasoning behind the underlying dynamics that are modeled by extensively discussing the SDEs and stochastic processes within each model. \\
+
+Moreover, we cover in more detail all simulation techniques needed to draw random paths for the price processes by explaining techniques to generate random draws from varying probability density functions. As an example, in the variance process under BNS, an Ornstein-Uhlenbeck (OU) process is used, where a Gamma density is assigned to the Background Driving Lévy Process (BDLP). This results in the need for random draws from the Poisson, Exponential, Standard Normal, and Standard Uniform distributions to simulate paths for the log-price process. \\
+
+Finally, we will compare final price differences between models and discuss how these findings can be explained by the characteristics of the different SDEs employed, and conclude by critically reflect on the use of Monte Carlo methods for the price process simulation.
+\end{textblock}
+
+\newpage
+%
+% In case you want to integrate the TeX-file for the titlepage
+% with the rest of your thesis, you can continue below
+% ------------------------- First pages ---------------------------
+% For table of contents, acknowlegments, ...
+% -----------------------------------------------------------------
+%\rmfamily
+
+\setcounter{page}{0}
+\pagenumbering{roman}
+
+
+\chapter*{Acknowledgements}
+
+I would like to thank...
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies lorem nec velit rutrum laoreet. Vivamus suscipit ex in arcu fringilla consectetur. Proin eget nibh a lectus finibus viverra. Fusce id fermentum ipsum. Integer a elit et enim hendrerit interdum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras nec velit vel elit finibus tempor. Nulla facilisi. Phasellus ut semper enim.
+
+Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer dapibus odio quis tortor tincidunt, vitae lobortis magna posuere. Nam semper semper nulla eget auctor. Nullam nec lectus tortor. Morbi vitae tellus eget lectus accumsan feugiat nec at velit. Suspendisse auctor urna nec nisi varius, at commodo magna aliquet. Phasellus vel magna in mi dictum luctus.
+
+Aliquam vestibulum, sem ac finibus suscipit, justo dui semper purus, vel congue felis sem id ex. Nullam sit amet elit sed sapien vestibulum efficitur. In hac habitasse platea dictumst. Curabitur commodo dolor ut libero efficitur bibendum. Fusce ullamcorper sapien non leo pharetra consequat. Proin aliquet arcu eget purus faucibus feugiat. Suspendisse tempus est a nulla lacinia, id ultrices metus consequat.
+
+Donec id arcu sit amet eros 
+
+\newpage
+
+\tableofcontents
+
+\newpage
+% -------------------------- Proper text --------------------------
+% Introduction, chapters, ...
+% -----------------------------------------------------------------
+\setcounter{page}{0}
+\pagenumbering{arabic}
+
+\addcontentsline{toc}{chapter}{General Introduction}
+\chapter*{General Introduction}
+
+A general introduction.\\
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies lorem nec velit rutrum laoreet. Vivamus suscipit ex in arcu fringilla consectetur. Proin eget nibh a lectus finibus viverra. Fusce id fermentum ipsum. Integer a elit et enim hendrerit interdum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras nec velit vel elit finibus tempor. Nulla facilisi. Phasellus ut semper enim.
+
+Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer dapibus odio quis tortor tincidunt, vitae lobortis magna posuere. Nam semper semper nulla eget auctor. Nullam nec lectus tortor. Morbi vitae tellus eget lectus accumsan feugiat nec at velit. Suspendisse auctor urna nec nisi varius, at commodo magna aliquet. Phasellus vel magna in mi dictum luctus.
+
+Aliquam vestibulum, sem ac finibus suscipit, justo dui semper purus, vel congue felis sem id ex. Nullam sit amet elit sed sapien vestibulum efficitur. In hac habitasse platea dictumst. Curabitur commodo dolor ut libero efficitur bibendum. Fusce ullamcorper sapien non leo pharetra consequat. Proin aliquet arcu eget purus faucibus feugiat. Suspendisse tempus est a nulla lacinia, id ultrices metus consequat.
+
+Donec id arcu sit amet eros vehicula lacinia. Pellentesque vitae nibh luctus, vehicula mauris in, scelerisque odio. Nunc volutpat eleifend sem, vitae placerat odio eleifend et. Vivamus ut ex ut ligula consectetur elementum sed a justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed quis bibendum leo. Nulla facilisi. Sed nec pharetra justo.
+
+Praesent sed neque rutrum, commodo velit id, volutpat tellus. Fusce eu ex at urna laoreet lobortis. Nulla facilisi. Mauris lacinia enim eu tellus volutpat, a hendrerit sem interdum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer auctor diam sed mauris condimentum, in elementum nulla efficitur. Phasellus sed posuere ipsum.
+
+Suspendisse sit amet ligula sit amet libero fermentum posuere. Duis ullamcorper mi sit amet nibh consectetur, ut tincidunt justo dapibus. Curabitur interdum felis id dictum fermentum. Fusce sed feugiat quam. Ut euismod lacus at orci euismod sodales. Morbi tristique ipsum vitae dui laoreet, quis vehicula tortor volutpat. Vivamus id lacus fermentum, commodo odio at, aliquet metus.
+
+Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi sit amet nulla sit amet mauris tempus euismod. Ut fermentum nunc vitae sapien ultrices, eget ultrices neque convallis. Nulla ac faucibus enim. Fusce malesuada purus quis sollicitudin gravida. Donec et nisi nec tortor placerat feugiat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut euismod elit in tellus tincidunt, sed aliquam metus tempor.
+
+Duis nec augue at libero lacinia egestas ut id est. Maecenas mattis felis eget neque laoreet, nec dignissim magna dictum. Donec feugiat quam eu risus aliquet, nec luctus justo ultrices. Mauris sed convallis nisi. Sed a urna aliquam, dignissim velit non, tempus libero. Duis ac urna non orci volutpat vestibulum. Suspendisse potenti.
+
+In ut convallis sapien. Curabitur at nisi id ipsum vehicula tempus. Integer quis risus pulvinar, mattis felis vel, sollicitudin est. Vivamus efficitur ligula quis suscipit lacinia. Nam auctor ligula vitae justo finibus, sit amet cursus mi laoreet. Phasellus dapibus purus sed aliquet suscipit. Nullam ullamcorper, magna vel volutpat ultricies, arcu ligula suscipit nunc, in luctus leo neque non lectus. Curabitur ut justo eu felis ultricies tempor.
+
+Morbi et sapien non nisl efficitur tristique sit amet a justo. Sed viverra nulla vitae est eleifend, eget efficitur ipsum volutpat. Aliquam non odio eget velit lobortis blandit. Integer condimentum sollicitudin sapien, nec eleifend purus laoreet vitae. Sed ac dolor eget justo vehicula tempor. Donec faucibus elit in purus efficitur efficitur. In hac habitasse platea dictumst.
+
+Sed eu nunc volutpat, dictum justo ac, egestas nulla. Quisque sollicitudin metus ut sapien lacinia, in efficitur sem tempus. Duis auctor, elit nec sollicitudin semper, turpis metus vulputate orci, id consectetur ante arcu sit amet felis. Morbi nec magna libero. Cras fermentum dui eu felis dignissim, vitae interdum tortor viverra. Sed at augue et felis consectetur sollicitudin. Nullam vitae libero sit amet mi laoreet volutpat non in odio. Vivamus at augue eget lorem consectetur mattis sit amet a elit. Cras nec libero nec nisi convallis elementum.
+
+Integer semper est id felis facilisis, ac varius justo tincidunt. Proin at fermentum purus, nec tincidunt libero. Donec euismod pharetra elit, et placerat sapien. Pellentesque in tristique felis. In hac habitasse platea dictumst. Curabitur tincidunt velit at sapien tristique, id viverra ante aliquet. Donec ultricies diam eu leo varius, nec tempus nisi fermentum. Suspendisse nec turpis vel est maximus feugiat nec at turpis. Donec malesuada id metus vel aliquam. Vestibulum ut ex feugiat, volutpat tortor ac, tempus mauris. Proin feugiat dolor quis felis efficitur, in vehicula velit rhoncus. Curabitur phare
+
+\newpage
+
+\chapter{Title of the first chapter}
+
+In this chapter we will give an overview of...
+
+\section{Heading level 2}
+
+This first aspect... As stated by \cite{Distribution}...
+
+\section{Heading level 2}
+
+After this short introduction, we will discuss the technical analysis of the problem.\\
+
+There are different aspects ........ that we are now going to study in detail.
+
+\subsection{Heading level 3}
+
+The first important aspect of ......
+
+\subsection{Heading level 3}
+
+We have to take into account that .......
+
+\subsubsection{Heading level 4}
+
+This factor contains a lot of subaspects ......
+
+\section{Heading level 2}
+
+We will not limit ourselves to the causes. We also have to deal with the consequences.
+
+\subsection{Heading level 3}
+
+One of the main consequences is....... The official statistics states that there ....\\
+
+Often it is the case that\footnote{Example of a footnote.} the data is presented in a table. That makes the information more visible to the reader.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c}
+        A & 50\% \\
+        B & 42\%
+    \end{tabular}
+    \caption{Caption}
+    \label{tab:my_label}
+\end{table}
+
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.3\textwidth]{sedes.png}
+    \caption{Caption}
+    \label{fig:enter-label}
+\end{figure}
+
+\clearpage
+
+\chapter{Title of the second chapter}
+
+\clearpage
+
+\addcontentsline{toc}{chapter}{General Conclusion}
+\chapter*{General Conclusion}
+
+Formulate the general conclusion of your thesis.
+
+
+% Bibliography
+\newpage
+\bibliographystyle{apalike}
+\bibliography{refs} % Entries are in the refs.bib file
+\addcontentsline{toc}{chapter}{Sources}
+
+\clearpage
+
+\listoffigures
+\addcontentsline{toc}{chapter}{List of figures}
+
+\clearpage
+
+\listoftables
+\addcontentsline{toc}{chapter}{List of tables}
+
+\clearpage
+
+\begin{appendices}
+    \section*{Appendix 1: Title of appendix 1}
+
+    Content of appendix 1
+
+    \section*{Appendix 2: Title of appendix 2}
+
+    Content of appendix 2
+\end{appendices}
+
+
+% ----------------------- Back cover ------------------------------
+% Please fill in:
+% - Department
+% - Department's address
+% - Telephone number and fax number
+% -----------------------------------------------------------------
+\newpage
+\thispagestyle{empty}
+\sffamily
+%
+\begin{textblock}{191}(92,-11)
+{\color{blueline}\rule{217pt}{5.5pt}}
+\end{textblock}
+%
+\begin{textblock}{191}(168,-11)
+{\color{blueline}\rule{5.5pt}{80pt}}
+\end{textblock}
+%
+\begin{textblock}{183}(-27,-5)
+\textblockcolour{}
+\flushright
+\fontsize{8}{10}\selectfont
+\textbf{FACULTY OF BUSINESS AND ECONOMICS}\\
+www.feb.kuleuven.be\\
+\end{textblock}
+%
+\begin{textblock}{191}(152,-7)
+\textblockcolour{}
+\includegraphics*[height=24truemm]{sedes}
+\end{textblock}
+%
+\begin{textblock}{191}(-20,235)
+{\color{bluetitle}\rule{544pt}{55pt}}
+\end{textblock}
+%
+\begin{textblock}{191}(125, 208)
+\textblockcolour{}
+\includegraphics*[height=15truemm]{LogoKULASSOC}
+\end{textblock}
+\end{document}

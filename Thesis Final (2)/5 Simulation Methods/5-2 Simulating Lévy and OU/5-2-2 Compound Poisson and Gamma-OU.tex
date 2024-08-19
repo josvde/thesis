@@ -1,0 +1,36 @@
+
+\subsection{Compound Poisson and Gamma-OU processes}
+
+\textbf{Simulation Compound Poisson Process}\\
+\begin{flushleft}
+\begin{itemize}
+        \item Simulate a Poisson process $N=\{N_{t},t\geq 0\}$ with intensity parameter $a\lambda$ in time points $t = \hspace{0.15em} \Delta \hspace{0.05em} t \hspace{0.05em} n$ for $n = 0,1,2,...,N$ using the Exponential Spacing Method.
+
+        \item Simulate an i.i.d. sequence $x_1,...,x_N$ following $\sim Gamma(1,b)$ distribution, which simplifies to a $\sim Exp(b)$ density. Values for $x_i$ can be calculated by $x_{i}=-log(u_i)/b$, with $u_i \sim U(1,0)$. Note that the length of this sequence equals the final value of the Poisson Process at  $\Delta \hspace{0.05em} t \hspace{0.05em} N$ . 
+
+        \item Calculate the compound Poisson process, as defined in Chapter 3 by combining the values of $N_{t}$ and $x_{t}$.
+
+\end{itemize}
+\end{flushleft}
+
+From the step above we can see that we generate a jump-size at each jump arrival-time, and these values are both generated from a random exponential draw. However, the intensity parameters are different.\\
+
+
+\textbf{Simulation Gamma-OU}
+The simulation of the Gamma-OU process for the variance can be done by two methods: the Series Representation method, using the Inverse Tail Mass Function and the BDLP simulation method. When we use the latter, the variance process is discretized by:\\
+
+\begin{equation}
+\sigma_{n\Delta t}^2 = (1 - \lambda \Delta t) \sigma_{(n-1)\Delta t}^2 + z_{\lambda n \Delta t}-z_{\lambda (n-1)\Delta t} \notag\\
+\label{eq:5-2 Gamma-OU discretization}
+\end{equation}
+
+The $\lambda$ time-scaling of the jumps simulated by the BDLP of the Gamma-OU process, can be incorporated by setting the intensity parameter of the Poisson process equal to $a \lambda$. When $N = \{N_t, t \geq 0\}$ is a Poisson process with intensity parameter $ a $, i.e. $ \mathbb{E}[N_t] = at $, where the jump times $t$ are multiplied by $\lambda$. As a result the Poisson process used in the BDLP Compound Poisson Approximation is $\tilde{N} = \{ \tilde{N}_t, t \geq 0\}$, where $ \mathbb{E}[\tilde{N}_t] = a\lambda t $.\\
+
+\begin{equation}
+z_{\lambda n \Delta t} = \sum_{k=N_{(n-1)\Delta t}+1}^{N_{n\Delta t}} x_{k} \exp(-\lambda \Delta t \tilde{u}_{k})
+\label{eq:5-2 Gamma-OU BDLP Compound Poisson Approximation}
+\end{equation}\\
+
+Inside the summation operation $\{x_{k},k > 0\}$ are independent identically distributed sequences, where each $x_{k}$ follows a $Gamma (1,b) =  Exp(b)$ law. These i.i.d. random variables represent the jump-size at each jump moment. The timing of these jumps are indicated by an increase in value of the Poisson Process, which is reflected in the by the starting and ending value of the summation operation.\\
+Draws from an exponential distribution can be by setting $x_{k}=-log(u_{k}/b)$, where $u_k$ is a random standard uniform draw.\\
+

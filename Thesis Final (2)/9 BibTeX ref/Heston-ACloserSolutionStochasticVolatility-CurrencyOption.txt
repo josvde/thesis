@@ -1,0 +1,14 @@
+@article{e0f45016-f730-320a-bedc-d34f406805b2,
+ ISSN = {08939454, 14657368},
+ URL = {http://www.jstor.org/stable/2962057},
+ abstract = {I use a new technique to derive a closed-form solution for the price of a European call option on an asset with stochastic volatility. The model allows arbitrary correlation between volatility and spot-asset returns. I introduce stochastic interest rates and show how to apply the model to bond options and foreign currency options. Simulations show that correlation between volatility and the spot asset's price is important for explaining return skewness and strike-price biases in the Black-Scholes (1973) model. The solution technique is based on characteristic functions and can be applied to other problems.},
+ author = {Steven L. Heston},
+ journal = {The Review of Financial Studies},
+ number = {2},
+ pages = {327--343},
+ publisher = {[Oxford University Press, Society for Financial Studies]},
+ title = {A Closed-Form Solution for Options with Stochastic Volatility with Applications to Bond and Currency Options},
+ urldate = {2024-08-18},
+ volume = {6},
+ year = {1993}
+}

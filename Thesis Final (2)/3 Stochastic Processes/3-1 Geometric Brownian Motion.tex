@@ -1,0 +1,48 @@
+
+\section{Geometric Brownian Motion}
+
+
+\begin{itemize}
+	\item 3.2.1 definition; say its a Lévy
+	\item path properties: infinite variation each interval
+	\item scaling propery $ cW_{t} (\sigma=1) = W_{t} (\sigma = c)$
+\end{itemize}
+
+
+
+As a stochastic process is standard Brownian Motion $W = \{ W_{t}, t \geq 0 \} $ with $W_{0} = 0$ if it has the following properties:
+
+\begin{itemize}
+
+\item[(i)] it has indipendent increments
+\item[(ii)] it has stationary increments
+\item[(iii)] $W_{t+s} - W_{t} \sim$ Normal (0,s)
+
+\end{itemize}
+
+Brownian Motion is an example of a Lévy Process (see infra).\\
+Additionally, time-interval of all possible sizes in paths of Brownian Motion have variation proportionally to the interval size, i.e. the increments are normally distributed with a variance proportional to the interval size.\\
+
+\textbf{Geometric Brownian Motion}
+Black and Scholes proposed in 1973 to use Geometric Brownian
+Motion (GBM) as a continuous time stochastic process to model
+stock prices, by the SDE given below:
+\begin{equation}
+d\hspace{0.1em}S_{t}=\mu S_{t}dt + \sigma S_{t}\hspace{0.1em}
+d\hspace{0.15em} W_{t}
+\label{eq:BS1}
+\end{equation}
+
+From this they derived a process for the natural logarithm of
+the stock price:
+
+\begin{equation}
+d\hspace{0.1em}Z_{t}=d\hspace{0.1em}ln(S_{t})=(\mu -
+\frac{1}{2}\sigma^{2})dt + \sigma d\hspace{0.15em} W_{t}
+\label{eq:BS2}
+\end{equation}
+
+where $W = \{W_{t},t\geq0\}$ represents standard Brownian Motionin both versions of the GBM.\\
+
+\textbf{Need for Lévy process to extend on Normally distributed
+increments in Brownian Motion}\\
